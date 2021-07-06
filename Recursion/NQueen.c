@@ -1,5 +1,5 @@
-//11209
-#include <stdio.h>
+
+#include<stdio.h>
 
 int col[50]={0},cnt1[50]={0},cnt2[50]={0};
 int n,ans=0;
