@@ -1,7 +1,10 @@
 //11209
 #include <stdio.h>
+
 int col[50]={0},cnt1[50]={0},cnt2[50]={0};
 int n,ans=0;
+void queen(int row);
+int qtest(int x, int y);
 int main(){
     scanf("%d",&n);
     queen(0);
