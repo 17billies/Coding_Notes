@@ -28,4 +28,10 @@ void find_seq(int *A,int cur,int n){
         return;
     }
     else return;
+<<<<<<< HEAD
 }
+=======
+    
+
+}
+>>>>>>> 240260825243fb90f7dd71a2202d6820f8967392
