@@ -1,3 +1,4 @@
+//11662
 #include<stdio.h>
 void find_seq(int *A,int cur,int n);
 int B[2050]={0};
@@ -27,6 +28,4 @@ void find_seq(int *A,int cur,int n){
         return;
     }
     else return;
-    
-
 }

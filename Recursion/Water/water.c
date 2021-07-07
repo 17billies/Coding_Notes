@@ -1,15 +1,17 @@
+
 #include <stdio.h>
 #include <stdlib.h>
-#define MAXNV 5
+#define MAXNV 10
 int DONE = 0;
-int liters[MAXNV];
+int liters[MAXNV]={0};
 int numbers[MAXNV];
+int count[MAXNV]={0};
 void show(int nv);
-int cmp(const void *a, const void *b);
 void filling(int amount, int cur, int nv);
 int j=0;
 int water;
 int min=100;
+int temp=0;
 int min_numbers[MAXNV]={0};
 int main(void){
     int nv, i;
@@ -18,8 +20,8 @@ int main(void){
     for (i=0; i<nv; i++) {
         scanf("%d", &liters[i]);
     }
-    qsort(liters,nv,sizeof(liters[0]),cmp);
     scanf("%d", &water);
+    min=water;
     filling(water, 0, nv);
 
     for(i=0;i<nv;i++)
@@ -37,34 +39,43 @@ void show(int nv){
     printf(")\n");
 }
 
-void filling(int amount, int cur, int nv){
+void filling(int amount, int cur, int nv){//where we have to write
+    int times=0;
     
-    if(amount<=DONE){
+    if(amount==0){
+        DONE++;
+        if(temp<min){
+            min=temp;
+            //printf("%d\n",min);
+            for(int i=0;i<nv;++i){
+                min_numbers[i]=count[i];
+                //printf("==%d\n",min_numbers[i]);
+            }
+            count[cur]=0;
+        }
         return;
     }
-    
-    if(liters[cur]<=amount){
-        min_numbers[cur]++;
-        amount-=liters[cur];
-        filling(amount,cur,nv);
-    }
-    else if(cur==nv-1){
-        amount-=liters[cur];
-        min_numbers[cur]++;
-        filling(amount,cur,nv);
-    }
-    else{
-        filling(amount,cur+1,nv);
-    }
+    for(int i=cur;i<nv;++i){
+        //printf("i==%d, temp==%d ,amount==%d\n",i,temp,amount);
+        while(amount>=liters[i]){
+            temp++;
+            count[i]++;
+            amount-=liters[i];
+        }
+        //printf("amount==%d\n",amount);
+        filling(amount,i+1,nv);
+        amount+=count[i]*liters[i];
+        temp-=count[i];
+        count[i]=0;
         
+    }
+    return;
 }
+   
 
-int cmp(const void *a, const void *b)//reminder:a pointer in the input
-{
-      int c = *(int*)a;
-    int d = *(int*)b;
 
-      if(c > d) {return -1;}
-      else if (c == d) {return 0;}
-      else return 1;
-}
+    
+    
+        
+
+
