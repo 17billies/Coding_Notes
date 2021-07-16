@@ -55,6 +55,7 @@ int battle(Char *hero, Mon *mon){
         }
         ++j;
     }
+    return 0;
 }
 
 int can_go(int x, int y){
